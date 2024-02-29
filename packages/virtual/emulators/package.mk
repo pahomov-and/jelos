@@ -40,7 +40,7 @@ case "${DEVICE}" in
   RK358*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gpsp-lr pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa duckstation-sa melonds-sa nanoboyadvance-sa box64 scummvmsa   \
-               yabasanshiro-sa portmaster beetle-saturn-lr"
+               yabasanshiro-sa portmaster beetle-saturn-lr openmw"
     LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr citra-lr dolphin-lr pcsx_rearmed-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
@@ -53,7 +53,7 @@ case "${DEVICE}" in
   ;;
   RK356*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gpsp-lr pcsx_rearmed-lr"
-    PKG_DEPENDS_TARGET+=" common-shaders duckstation-sa glsl-shaders mupen64plus-sa scummvmsa box64 portmaster"
+    PKG_DEPENDS_TARGET+=" common-shaders duckstation-sa glsl-shaders mupen64plus-sa scummvmsa box64 portmaster openmw"
     PKG_EMUS+=" amiberry drastic-sa yabasanshiro-sa"
     LIBRETRO_CORES+=" uae4arm flycast-lr"
     PKG_RETROARCH+=" retropie-shaders"

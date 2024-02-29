@@ -1,0 +1,55 @@
+From 40e7da96d317d65b4bfbaf81d180ad6e2ce97dda Mon Sep 17 00:00:00 2001
+From: Andrey Pahomov <andrey.pahomov@toshibagcs.com>
+Date: Tue, 27 Feb 2024 20:09:49 +0200
+Subject: [PATCH] Fix build
+
+Signed-off-by: Andrey Pahomov <andrey.pahomov@toshibagcs.com>
+---
+ CMakeLists.txt            | 3 ++-
+ components/CMakeLists.txt | 9 +++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ef7340232f..148ef64bbd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -24,6 +24,7 @@ project(OpenMW)
+ 
+ set(CMAKE_CXX_STANDARD 20)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
++add_compile_definitions(BT_THREADSAFE)
+ 
+ include(GNUInstallDirs)
+ 
+@@ -1048,7 +1049,7 @@ endif(OPENMW_OSX_DEPLOYMENT AND APPLE)
+ # output directory for 'make doc'       is "${OpenMW_BINARY_DIR}/docs/Doxygen"
+ # output directory for 'make doc_pages' is "${DOXYGEN_PAGES_OUTPUT_DIR}" if defined
+ #                                       or "${OpenMW_BINARY_DIR}/docs/Pages" otherwise
+-find_package(Doxygen)
++#find_package(Doxygen)
+ if (DOXYGEN_FOUND)
+     # determine output directory for doc_pages
+     if (NOT DEFINED DOXYGEN_PAGES_OUTPUT_DIR)
+diff --git a/components/CMakeLists.txt b/components/CMakeLists.txt
+index 324d5b410f..521b2fe0ab 100644
+--- a/components/CMakeLists.txt
++++ b/components/CMakeLists.txt
+@@ -439,6 +439,15 @@ target_link_libraries(components
+     yaml-cpp
+     )
+ 
++find_package(ZLIB REQUIRED)
++target_link_libraries(components ZLIB::ZLIB)
++
++if(OPENMW_USE_SYSTEM_MYGUI)
++    find_package(MyGUI 3.4.1 REQUIRED)
++endif()
++
++target_link_libraries(components ${MyGUI_LIBRARIES} MyGUIEngine)
++
+ if(Boost_VERSION_STRING VERSION_GREATER_EQUAL 1.77.0)
+     target_link_libraries(components ${Boost_ATOMIC_LIBRARY})
+ endif()
+-- 
+2.34.1
+
